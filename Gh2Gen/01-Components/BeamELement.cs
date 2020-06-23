@@ -74,11 +74,11 @@ namespace Gh2Gen._01_Components
             if (bool_gname)
             {
                 string[] namesArray = gnames.Split(',');
-                gnames2 = new List<string>(namesArray);
+                gnames2 = new List<string>(namesArray);//获得组名
             }
 
-            BeamElementCls Beami = new BeamElementCls(linei, material, section);
-            Beami.Groupname = gnames2;
+            BeamElementCls Beami = new BeamElementCls(linei, material, section);//创建梁单元对象
+            Beami.Groupname = gnames2;//给梁单元对象赋予组名
             DA.SetData(0, new GH_BeamElement(Beami));
         }
 

@@ -7,6 +7,9 @@ using Rhino.Geometry;
 using Grasshopper.Kernel.Types;
 namespace Gh2Gen._00_BaseObj
 {
+    /// <summary>
+    /// GH_Param，类似GH_Component,GH中另一种组件，参数组件
+    /// </summary>
     public class Param_BeamLoad : GH_Param<GH_BeamLoadCls>, IGH_PreviewObject
     {
 

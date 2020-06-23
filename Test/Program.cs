@@ -53,27 +53,27 @@ namespace Test
                 }
             }
         }
-        private static List<T[]> GetCombination2(T[] t, int m)
-        {
-            List<T[]> res = new List<T[]>();
-            T[] temp = new T[m];
+        //private static List<T[]> GetCombination2(T[] t, int m)
+        //{
+        //    List<T[]> res = new List<T[]>();
+        //    T[] temp = new T[m];
 
-            for (int i = 0; i < t.Length - 1; i++)
-            {
-                if (m == 1)
-                {
-                    temp[0] = t[i];
-                }
-                else
-                {
-                    T[] t2 = new T[t.Length - 1];
-                    Array.Copy(t, i + 1, t2, 0, t.Length - 1);
-                    GetCombination2(t2, m - 1);
-                }
+        //    for (int i = 0; i < t.Length - 1; i++)
+        //    {
+        //        if (m == 1)
+        //        {
+        //            temp[0] = t[i];
+        //        }
+        //        else
+        //        {
+        //            T[] t2 = new T[t.Length - 1];
+        //            Array.Copy(t, i + 1, t2, 0, t.Length - 1);
+        //            GetCombination2(t2, m - 1);
+        //        }
 
-            }
+        //    }
 
-        }
+        //}
         /// <summary>
         /// 递归算法求排列(私有成员)
         /// </summary>

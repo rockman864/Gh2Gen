@@ -8,11 +8,10 @@ using Grasshopper.Kernel.Types;
 
 namespace Gh2Gen._00_BaseObj
 {
+    
     public class Param_BeamElement : GH_Param<GH_BeamElement>,IGH_PreviewObject
     {
-        /// <summary>
-        /// Initializes a new instance of the Param_BeamElement class.
-        /// </summary>
+
         private bool m_hidden;
         private bool m_preview;
         public Param_BeamElement( ):base(new GH_InstanceDescription("BeamElement", "BeamElement", "BeamElement", "Midas", "00 Params"))
@@ -20,10 +19,6 @@ namespace Gh2Gen._00_BaseObj
             m_hidden = false;
             m_preview = true;
         }
-
-        /// <summary>
-        /// Registers all the input parameters for this component.
-        /// </summary>
 
         public void DrawViewportWires(IGH_PreviewArgs args)
         {

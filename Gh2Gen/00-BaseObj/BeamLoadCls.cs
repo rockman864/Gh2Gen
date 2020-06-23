@@ -64,11 +64,11 @@ namespace Gh2Gen._00_BaseObj
             }
             CoordDir = string.Concat(this.coord, this.dir);
         }
-        public override string ToString()
-        {
-            return string.Concat("this is a beam load,value is :", Value);
+        //public override string ToString()
+        //{
+        //    return string.Concat("this is a beam load,value is :", Value);
 
-        }
+        //}
 
         public object Clone()
         {
