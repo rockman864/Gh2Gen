@@ -28,13 +28,13 @@ namespace Gh2Gen._00_BaseObj
                 return Boundingbox;
             }
         }
-        //public override bool CastTo<Q>(out Q target)
-        //{
-        //    Type c = new BeamLoadCls().GetType();
-        //    object obj2 = base.m_value;
-        //    target = (Q)obj2;
-        //    return typeof(Q).IsAssignableFrom(c);
-        //}
+        public override bool CastTo<Q>(out Q target)
+        {
+            Type c = new BeamLoadCls().GetType();
+            object obj2 = base.m_value;
+            target = (Q)obj2;
+            return typeof(Q).IsAssignableFrom(c);
+        }
         /// <summary>
         /// 返回类型的名字
         /// </summary>
