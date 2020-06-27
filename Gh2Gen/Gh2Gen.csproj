@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="KangarooSolver">
-      <HintPath>D:\Program Files\Rhino 6\Plug-ins\Grasshopper\Components\KangarooSolver.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\..\Program Files\Rhino 6\Plug-ins\Grasshopper\Components\KangarooSolver.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -68,7 +68,6 @@
     <Compile Include="00-BaseObj\ObjList.cs" />
     <Compile Include="00-BaseObj\Param_BeamElement.cs" />
     <Compile Include="00-BaseObj\Param_BeamLoad.cs" />
-    <Compile Include="00-BaseObj\Param_bele.cs" />
     <Compile Include="00-BaseObj\Param_ShellElement.cs" />
     <Compile Include="00-BaseObj\ShellLoadCls.cs" />
     <Compile Include="00-BaseObj\SupportCls.cs" />

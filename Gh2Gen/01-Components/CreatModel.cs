@@ -152,8 +152,8 @@ namespace Gh2Gen._01_Components
                     BeamLoadCls bloadi = BeamLoadList[i];
                     if(bloadi!=null)
                     {
-                        Point3d midPtChk = bloadi.LoadLine.PointAt(0.5);
-                        SetBeamLoadEleNo(beamMidPts, midPtChk, err, bloadi);//设置梁单元荷载对象中的单元编号属性，此属性在单元未合并之前，并不知道每个单元的编号，因此只能放在创建模型中实现
+                        //Point3d midPtChk = bloadi.LoadLine.PointAt(0.5);
+                        SetBeamLoadEleNo(beamMidPts,bloadi,err);//设置梁单元荷载对象中的单元编号属性，此属性在单元未合并之前，并不知道每个单元的编号，因此只能放在创建模型中实现
                     }
                    
                 }
@@ -168,16 +168,30 @@ namespace Gh2Gen._01_Components
             }
             DA.SetData(1, model);//输出模型数据对象
         }
-
-        public void SetBeamLoadEleNo(RTree rt, Point3d chkPt, double err, BeamLoadCls beamLoad)
+        /// <summary>
+        /// 设置荷载对象的单元编号
+        /// </summary>
+        /// <param name="rt">所有梁单元中点，RTree存储</param>
+        /// <param name="beamLoad">被检查的梁单元线荷载</param>
+        /// <param name="err">检测误差</param>
+        /// 
+        private void SetBeamLoadEleNo(RTree rt, BeamLoadCls beamLoad,double err)
         {
+            Point3d chkPt = beamLoad.LoadLine.PointAt(0.5);
             EventHandler<RTreeEventArgs> rTreeCallback = (object sender, RTreeEventArgs args) =>
                  {
                      beamLoad.EleNo=args.Id+1;
                  };
             rt.Search(new Sphere(chkPt, err), rTreeCallback);
         }
-        public void RtreeSearch(RTree pointsCloud, Point3d chkPt, double err, List<int> vertices)
+        /// <summary>
+        /// 当被检测点与某个点很近时，记录该点的索引。
+        /// </summary>
+        /// <param name="pointsCloud"></param>
+        /// <param name="chkPt"></param>
+        /// <param name="err"></param>
+        /// <param name="vertices"></param>
+        private void RtreeSearch(RTree pointsCloud, Point3d chkPt, double err, List<int> vertices)
         {
 
             EventHandler<RTreeEventArgs> rTreeCallback =
@@ -187,8 +201,13 @@ namespace Gh2Gen._01_Components
                 };
             pointsCloud.Search(new Sphere(chkPt, err), rTreeCallback);//在空间点云pointsCloud中搜索点chkPt,如果距离小于err，则调用rTreeCallback
         }
-
-        public void SetMeshVerInd(RTree pointsCloud, List<ShellElementCls> ShellElem, double err)
+        /// <summary>
+        /// 设置壳单元的顶点索引
+        /// </summary>
+        /// <param name="pointsCloud">模型中所有的节点，RTree存储</param>
+        /// <param name="ShellElem">壳单元列表</param>
+        /// <param name="err">检测误差</param>
+        private void SetMeshVerInd(RTree pointsCloud, List<ShellElementCls> ShellElem, double err)
         {
             for (int i = 0; i < ShellElem.Count; i++)
             {
@@ -201,11 +220,15 @@ namespace Gh2Gen._01_Components
                 ShellElem[i].Nodes_no = verticesIndex;
             }
         }
-
-        public void SetLineVerInd(RTree pointsCloud, List<BeamElementCls> lineobjs, double err)
+        /// <summary>
+        /// 设置梁单元的顶点索引
+        /// </summary>
+        /// <param name="pointsCloud"></param>
+        /// <param name="lineobjs"></param>
+        /// <param name="err"></param>
+        private void SetLineVerInd(RTree pointsCloud, List<BeamElementCls> lineobjs, double err)
         {
-            int num = lineobjs.Count;
-            for (int i = 0; i < num; i++)
+            for (int i = 0; i < lineobjs.Count; i++)
             {
                 List<int> verticesIndex = new List<int>();
                 for (int j = 0; j < 2; j++)

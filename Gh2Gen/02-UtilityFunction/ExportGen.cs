@@ -68,7 +68,7 @@ namespace Gh2Gen._02_UtilityFunction
         {
             //输出节点信息
             Sw.WriteLine("*UNIT");
-            Sw.WriteLine("KN,M,KJ,C");
+            Sw.WriteLine("N,MM,KJ,C");
             Sw.WriteLine("*NODE");
             for (int i = 0; i < Model.Nodes.Count; i++)
             {
