@@ -12,13 +12,13 @@ namespace Gh2Gen._02_UtilityFunction
     /// <summary>
     /// 输出模型前的初始化参数：模型、路径、写入文件流
     /// </summary>
-    public abstract class ExportSetting
+    public abstract class ExportModel
     {
         public ModelCls Model { get; set; }
         public string Pathfile { get; set; }
         public StreamWriter Sw { get; set; }
 
-        public ExportSetting(ModelCls model, string path0,string type)
+        public ExportModel(ModelCls model, string path0,string type)
         {
             Model = model;
             string path = string.Concat(path0, type);
@@ -29,7 +29,7 @@ namespace Gh2Gen._02_UtilityFunction
     /// <summary>
     /// 输出模型命令流
     /// </summary>
-    public class ExportGen:ExportSetting
+    public class ExportGen:ExportModel
     {
         public ExportGen(ModelCls model,string path0):base(model,path0,".mgt")
         {

@@ -54,17 +54,17 @@ namespace Gh2Gen._01_Components
             DA.GetData(3, ref cmd);
             if(DA.GetData(0,ref mymodel)&&DA.GetData(1,ref path0)&&DA.GetData(2,ref typeFile)&&cmd)
             {
-                ExportSetting exportOperation =null;
+                ExportModel myExport =null;
                 switch (typeFile)
                 {
                     case 1:
-                        exportOperation = new ExportGen(mymodel,path0);
+                        myExport = new ExportGen(mymodel,path0);
                         break;
                     case 2:
-                        exportOperation= new ExportAbaqus(mymodel, path0);
+                        myExport= new ExportAbaqus(mymodel, path0);
                         break;
                 }
-                Process process = Process.Start(exportOperation.Pathfile);//打开输出的文件，便于直接复制
+                Process process = Process.Start(myExport.Pathfile);//打开输出的文件，便于直接复制
                 process.Dispose();
             }
         }
