@@ -47,24 +47,24 @@ namespace Gh2Gen._01_Components
         /// <param name="DA">The DA object is used to retrieve from inputs and store in outputs.</param>
         protected override void SolveInstance(IGH_DataAccess DA)
         {
-            ModelCls mymodel = new ModelCls();
-            string path0 = null;
-            int typeFile = 1;
-            bool cmd = false;
+            ModelCls mymodel = new ModelCls();//新建模型对象，存储建立的模型
+            string path0 = null;//路径
+            int typeFile = 1;//文件类型，1为midas mgt，2为abaqus inp
+            bool cmd = false;//文件输出指令，True为输出
             DA.GetData(3, ref cmd);
             if(DA.GetData(0,ref mymodel)&&DA.GetData(1,ref path0)&&DA.GetData(2,ref typeFile)&&cmd)
             {
-                Ioutput outputfile=null;
+                ExportSetting exportOperation =null;
                 switch (typeFile)
                 {
                     case 1:
-                        outputfile = new ExportGen(mymodel,path0);
+                        exportOperation = new ExportGen(mymodel,path0);
                         break;
                     case 2:
-                        outputfile= new ExportAbaqus(mymodel, path0);
+                        exportOperation= new ExportAbaqus(mymodel, path0);
                         break;
                 }
-                Process process = Process.Start(outputfile.Pathfile);
+                Process process = Process.Start(exportOperation.Pathfile);//打开输出的文件，便于直接复制
                 process.Dispose();
             }
         }

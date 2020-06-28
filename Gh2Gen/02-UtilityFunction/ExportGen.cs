@@ -9,14 +9,16 @@ using Gh2Gen._00_BaseObj;
 
 namespace Gh2Gen._02_UtilityFunction
 {
-    public abstract class PrepareModel//准备好模型数据、路径和文件流
+    /// <summary>
+    /// 输出模型前的初始化参数：模型、路径、写入文件流
+    /// </summary>
+    public abstract class ExportSetting
     {
-        //private StreamWriter sw;
         public ModelCls Model { get; set; }
         public string Pathfile { get; set; }
         public StreamWriter Sw { get; set; }
 
-        public PrepareModel(ModelCls model, string path0,string type)
+        public ExportSetting(ModelCls model, string path0,string type)
         {
             Model = model;
             string path = string.Concat(path0, type);
@@ -24,12 +26,10 @@ namespace Gh2Gen._02_UtilityFunction
             Sw = new StreamWriter(new FileStream(Pathfile, FileMode.Create, FileAccess.Write));
         }
     }
-    interface Ioutput
-    {
-        string Pathfile { get; set; }
-        void OutPutFile();
-    }
-    public class ExportGen:PrepareModel,Ioutput
+    /// <summary>
+    /// 输出模型命令流
+    /// </summary>
+    public class ExportGen:ExportSetting
     {
         public ExportGen(ModelCls model,string path0):base(model,path0,".mgt")
         {
@@ -47,6 +47,9 @@ namespace Gh2Gen._02_UtilityFunction
             ExptEnd();
 
         }
+        /// <summary>
+        /// 输出梁单元荷载
+        /// </summary>
         void ExptBLoad()
         {
             Sw.WriteLine("*STLDCASE");
@@ -64,11 +67,14 @@ namespace Gh2Gen._02_UtilityFunction
 
 
         }
+        /// <summary>
+        /// 输出节点和梁单元命令流
+        /// </summary>
         void ExptNodesBeams()
         {
             //输出节点信息
             Sw.WriteLine("*UNIT");
-            Sw.WriteLine("N,MM,KJ,C");
+            Sw.WriteLine("N,MM,J,C");
             Sw.WriteLine("*NODE");
             for (int i = 0; i < Model.Nodes.Count; i++)
             {
@@ -86,7 +92,9 @@ namespace Gh2Gen._02_UtilityFunction
                 }
             }
         }
-        //输出壳元命令流
+        /// <summary>
+        /// 输出壳元命令流
+        /// </summary>
         void ExptShells()
         {
             for (int k = 0; k < Model.ShellElements.Count; k++)
@@ -104,7 +112,9 @@ namespace Gh2Gen._02_UtilityFunction
 
             }
         }
-        //输出组信息命令流
+        /// <summary>
+        /// 输出组信息命令流
+        /// </summary>
         void ExptGroups()
         {
             Sw.WriteLine("*GROUP");
@@ -137,9 +147,6 @@ namespace Gh2Gen._02_UtilityFunction
             Sw.WriteLine("*ENDDATA");
             Sw.Dispose();
         }
-
-        //输出组信息命令流
-
     }
 
 }

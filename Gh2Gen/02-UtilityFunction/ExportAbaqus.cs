@@ -7,7 +7,7 @@ using Gh2Gen._00_BaseObj;
 
 namespace Gh2Gen._02_UtilityFunction
 {
-    public class ExportAbaqus:PrepareModel,Ioutput
+    public class ExportAbaqus:ExportSetting
     {
         public ExportAbaqus(ModelCls model,string path0):base(model,path0,".inp")
         {
