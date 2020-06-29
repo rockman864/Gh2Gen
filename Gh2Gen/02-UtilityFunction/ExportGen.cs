@@ -47,26 +47,7 @@ namespace Gh2Gen._02_UtilityFunction
             ExptEnd();
 
         }
-        /// <summary>
-        /// 输出梁单元荷载
-        /// </summary>
-        void ExptBLoad()
-        {
-            Sw.WriteLine("*STLDCASE");
-            Sw.WriteLine("    DeadLoad,D,");
-            Sw.WriteLine("    LiveLoad,L,");
-            Sw.WriteLine("*USE-STLD,DeadLoad");
-            Sw.WriteLine("*SELFWEIGHT");
-            Sw.WriteLine("0,0,-1");
-            Sw.WriteLine("*BEAMLOAD");
-            for(int i=0;i<Model.BeamLoads.Count;i++)
-            {
-                BeamLoadCls loadi = Model.BeamLoads[i];
-                Sw.WriteLine("   {0},Beam,UNILOAD,{1},NO,NO,aDir[1], , , , 0,{2},1,{2},0,0,0,0,,NO,0,0,NO,", loadi.EleNo, loadi.CoordDir, loadi.Value);
-            }
-
-
-        }
+        
         /// <summary>
         /// 输出节点和梁单元命令流
         /// </summary>
@@ -123,7 +104,7 @@ namespace Gh2Gen._02_UtilityFunction
                 string groupi_name = Model.Groups[i].Gname;
                 List<int> groupi_no = Model.Groups[i].Ele_no;
                 groupi_no.Sort();
-                List<string> groupi_DomList = FunctionClass.getDomain(groupi_no);
+                List<string> groupi_DomList = FunctionClass.GetDomain(groupi_no);
                 List<string> groupi_DomList2 = FunctionClass.mergeList(groupi_DomList, 60);//单元列表改为每一行60个字符
                 string cmd = null;
                 for (int j = 0; j < groupi_DomList2.Count; j++)
@@ -138,9 +119,26 @@ namespace Gh2Gen._02_UtilityFunction
                     }
                     Sw.WriteLine(cmd);
                 }
-
             }
+        }
 
+        /// <summary>
+        /// 输出梁单元荷载
+        /// </summary>
+        void ExptBLoad()
+        {
+            Sw.WriteLine("*STLDCASE");
+            Sw.WriteLine("    DeadLoad,D,");
+            Sw.WriteLine("    LiveLoad,L,");
+            Sw.WriteLine("*USE-STLD,DeadLoad");
+            Sw.WriteLine("*SELFWEIGHT");
+            Sw.WriteLine("0,0,-1");
+            Sw.WriteLine("*BEAMLOAD");
+            for (int i = 0; i < Model.BeamLoads.Count; i++)
+            {
+                BeamLoadCls loadi = Model.BeamLoads[i];
+                Sw.WriteLine("   {0},Beam,UNILOAD,{1},NO,NO,aDir[1], , , , 0,{2},1,{2},0,0,0,0,,NO,0,0,NO,", loadi.EleNo, loadi.CoordDir, loadi.Value);
+            }
         }
         void ExptEnd()
         {

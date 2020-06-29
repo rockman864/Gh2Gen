@@ -98,16 +98,22 @@ namespace Gh2Gen._02_UtilityFunction
             }
             return GroupList;
         }
-        public static List<string> getDomain(List<int> numList)
+        /// <summary>
+        /// 输入一整数列表，返回列表中的数字范围，比如输入{1，2，3，7，8，9，11，12，13，15，17，19}，返回{1to3,7to9,11to13，15，17，19}
+        /// </summary>
+        /// <param name="numList">输入的整数列表</param>
+        /// <returns>数字范围列表</returns>
+        public static List<string> GetDomain(List<int> numList)
         {
             List<int> flagindex = new List<int> { 0 };
             List<string> domainOutput = new List<string>();
-
+            //在间断的地方打标记，得到标记列表{0,3,6,9,10,11}
             for (int i = 0; i < numList.Count - 1; i++)
             {
                 if (numList[i + 1] - numList[i] == 1) continue;
                 else flagindex.Add(i + 1);
             }
+            //根据标记列表获得数字范围起始点
             for (int j = 0; j < flagindex.Count; j++)
             {
                 int domainS = numList[flagindex[j]];
@@ -121,6 +127,12 @@ namespace Gh2Gen._02_UtilityFunction
             }
             return domainOutput;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="domainList"></param>
+        /// <param name="bitsNum"></param>
+        /// <returns></returns>
         public static List<string> mergeList(List<string> domainList, int bitsNum)
         {
             //将单元范围列表按照一定长度合并，然后输出为要打印的信息
