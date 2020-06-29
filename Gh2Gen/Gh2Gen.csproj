@@ -64,7 +64,6 @@
     <Compile Include="00-BaseObj\GH_ObjList.cs" />
     <Compile Include="00-BaseObj\GH_ShellElement.cs" />
     <Compile Include="00-BaseObj\ModelCls.cs" />
-    <Compile Include="00-BaseObj\MyComponent1.cs" />
     <Compile Include="00-BaseObj\ObjList.cs" />
     <Compile Include="00-BaseObj\Param_BeamElement.cs" />
     <Compile Include="00-BaseObj\Param_BeamLoad.cs" />
