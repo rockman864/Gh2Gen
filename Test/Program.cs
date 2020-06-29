@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Gh2Gen._02_UtilityFunction;
 namespace Test
 {
     public class PermutationAndCombination<T>
@@ -325,17 +325,44 @@ namespace Test
                 combnames.ForEach(x => Console.WriteLine(String.Join(",", x)));
             }
             Console.ReadLine();
+        }
+        /// <summary>
+        /// 测试FunctionClass中的mergeList功能，输入节点编号范围均是不连续的编号
+        /// </summary>
+        static void TestGroup()
+        {
+            List<int> l1 = new List<int> { 10, 20, 30,40,50,70,80,90 };
+            List<string> s1 = new List<string>();
+            l1.ForEach(x => s1.Add(x.ToString()));
+            var StringList2 = FunctionClass.mergeList(s1, 23);
+            
+            for (int i = 0; i < StringList2.Count; i++)
+            {
+                Console.WriteLine(StringList2[i]);
+            }
+            Console.ReadLine();
+        }
+        /// <summary>
+        /// 测试FunctionClass中的mergeList功能
+        /// </summary>
+        static void TestGroup2()
+        {
+            List<string> s1 = new List<string> {"1to10","10to100","5","1","4","1000000to2000000","100","200"};
+            var StringList2 = FunctionClass.mergeList(s1, 10);
 
-
-
-
+            for (int i = 0; i < StringList2.Count; i++)
+            {
+                Console.WriteLine(StringList2[i]);
+            }
+            Console.ReadLine();
         }
         static void Main(string[] args)
         {
             //lambdaTest();
 
-            GetCombinationTest();
+            //GetCombinationTest();
             //LoadCombinationTest();
+            TestGroup2();
 
         }
     }

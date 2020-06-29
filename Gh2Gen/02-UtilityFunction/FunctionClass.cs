@@ -11,7 +11,7 @@ using Gh2Gen._00_BaseObj;
 
 namespace Gh2Gen._02_UtilityFunction
 {
-    class FunctionClass
+    public class FunctionClass
     {
         public static List<Point3d> deleteDuplicatPts(List<Point3d> pointsOrigin,double err)
         {
@@ -130,10 +130,10 @@ namespace Gh2Gen._02_UtilityFunction
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="domainList"></param>
-        /// <param name="bitsNum"></param>
+        /// <param name="domainList">单元编号范围列表</param>
+        /// <param name="lengthTol">字符串允许长度</param>
         /// <returns></returns>
-        public static List<string> mergeList(List<string> domainList, int bitsNum)
+        public static List<string> mergeList(List<string> domainList, int lengthTol)
         {
             //将单元范围列表按照一定长度合并，然后输出为要打印的信息
             //
@@ -146,21 +146,27 @@ namespace Gh2Gen._02_UtilityFunction
             }
             for (int i = 0; i < domainList.Count - 1; i++)
             {
-                temp += domainList[i] + " ";
-                string temp2 = temp + domainList[i + 1];
-                if (temp.Length < bitsNum && temp2.Length < bitsNum && i < domainList.Count - 2)
+                temp += domainList[i] + " ";//截止指针i处的字符串1
+                string temp2 = temp + domainList[i + 1];//截止指针i+1处的字符串2
+                if (temp2.Length < lengthTol && i < domainList.Count - 2)//字符串2长度小于允许长度,且指针i没到倒数第二个，继续给字符串1添加数据
                 {
                     continue;
                 }
-                else if (temp.Length <= bitsNum && temp2.Length >= bitsNum)
+                else if (temp2.Length < lengthTol && i == domainList.Count - 2)//字符串2长度小于允许长度,且指针i为倒数第二个,那么temp2字符串已经到头了，存储字符串2
+                {
+                    resultStringList.Add(temp2);
+                }
+                else if (temp2.Length >= lengthTol && i < domainList.Count - 2)//字符串2长度大于等于允许长度,且指针i没到倒数第二个，存储字符串1,然后清空变量，重新记录
                 {
                     resultStringList.Add(string.Concat(temp, @"\"));
                     temp = null;
                 }
-                else if (temp.Length < bitsNum && i == domainList.Count - 2)
+                else if (temp2.Length >= lengthTol && i == domainList.Count - 2)//字符串2长度大于等于允许长度,且指针i为倒数第二个，存储字符串1,然后存储倒数第一个数据
                 {
-                    resultStringList.Add(temp2);
+                    resultStringList.Add(string.Concat(temp, @"\"));
+                    resultStringList.Add(domainList[i + 1]);
                 }
+
             }
             return resultStringList;
         }

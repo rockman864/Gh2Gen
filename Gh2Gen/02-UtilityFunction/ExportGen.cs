@@ -105,7 +105,7 @@ namespace Gh2Gen._02_UtilityFunction
                 List<int> groupi_no = Model.Groups[i].Ele_no;
                 groupi_no.Sort();
                 List<string> groupi_DomList = FunctionClass.GetDomain(groupi_no);
-                List<string> groupi_DomList2 = FunctionClass.mergeList(groupi_DomList, 60);//单元列表改为每一行60个字符
+                List<string> groupi_DomList2 = FunctionClass.mergeList(groupi_DomList, 15);//单元列表改为每一行60个字符
                 string cmd = null;
                 for (int j = 0; j < groupi_DomList2.Count; j++)
                 {
