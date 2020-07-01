@@ -52,6 +52,11 @@ namespace Gh2Gen._02_UtilityFunction
                 }
             }
         }
+        /// <summary>
+        /// 提取所有梁单元顶点列表
+        /// </summary>
+        /// <param name="LineObj"></param>
+        /// <returns></returns>
         public static List<Point3d> getPoints(List<BeamElementCls> LineObj)
         {
             int numL = LineObj.Count;
@@ -63,6 +68,11 @@ namespace Gh2Gen._02_UtilityFunction
             }
             return pts;
         }
+        /// <summary>
+        /// 提取所有壳单元的顶点列表
+        /// </summary>
+        /// <param name="AreaObj">壳单元列表</param>
+        /// <returns></returns>
         public static List<Point3d> getPoints(List<ShellElementCls> AreaObj)
         {
             int numM = AreaObj.Count;
@@ -74,10 +84,15 @@ namespace Gh2Gen._02_UtilityFunction
             }
             return pts;
         }
-        public static List<Group> getGroupObjects0(List<BaseElementCls> EleObjList)
+        /// <summary>
+        /// 从模型所有单元信息中提取组对象列表，每个组有组名属性和单元列表属性
+        /// </summary>
+        /// <param name="EleObjList"></param>
+        /// <returns></returns>
+        public static List<Group> ExtractGroups(List<BaseElementCls> EleObjList)
         {
             List<Group> GroupList = new List<Group>();
-            for (int i = 0; i < EleObjList.Count; i++)
+            for (int i = 0; i < EleObjList.Count; i++)//遍历每个单元（包括梁单元、壳单元）
             {
                 int gnum = EleObjList[i].Groupname.Count;
                 for (int j = 0; j < gnum; j++)
@@ -90,7 +105,7 @@ namespace Gh2Gen._02_UtilityFunction
                     }
                     else
                     {
-                        Group groupFind = GroupList.Find(b => b.Gname == gn);//找到组对象中哪个组的名字=gn，然后增加新的索引
+                        Group groupFind = GroupList.Find(b => b.Gname == gn);//找到组对象中哪个组的名字=gn，然后给该组增加新的单元索引
                         groupFind.Ele_no.Add(EleObjList[i].Ele_no);
                         groupFind.Ele_no.Sort();
                     }
@@ -128,7 +143,7 @@ namespace Gh2Gen._02_UtilityFunction
             return domainOutput;
         }
         /// <summary>
-        /// 
+        /// 将单元编号范围列表domainList按照指定长度截断成多行，一行最长lengthTol。比如{"1to10","10to100","5","1","4","1000000to2000000","100","200"}=>{"1to10","10to100 5","1 4","1000000to2000000","100 200"}
         /// </summary>
         /// <param name="domainList">单元编号范围列表</param>
         /// <param name="lengthTol">字符串允许长度</param>

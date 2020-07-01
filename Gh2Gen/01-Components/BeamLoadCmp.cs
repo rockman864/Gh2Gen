@@ -63,9 +63,7 @@ namespace Gh2Gen._01_Components
             if (bool_beams && bool_value)
             {
                 BeamLoadCls beamloadi = new BeamLoadCls(loadcase, Beams.Value.Line, coordinate, direction, value);
-                //objlist.Value.Add(beamloadi);
                 DA.SetData(0, new GH_BeamLoadCls(beamloadi));
-                //DA.SetData(0, objlist);
             }
 
         }

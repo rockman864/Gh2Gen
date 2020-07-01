@@ -67,6 +67,7 @@ namespace Gh2Gen._01_Components
                 Process process = Process.Start(myExport.Pathfile);//打开输出的文件，便于直接复制
                 process.Dispose();
             }
+
         }
         /// <summary>
         /// Provides an Icon for the component.

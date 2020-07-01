@@ -27,11 +27,11 @@ namespace Gh2Gen._00_BaseObj
 
         }
         /// <summary>
-        /// 
+        /// 梁单元构造函数
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="material"></param>
-        /// <param name="section"></param>
+        /// <param name="line">线段</param>
+        /// <param name="material">材料编号</param>
+        /// <param name="section">截面编号</param>
         public BeamElementCls(Line line, int material, int section)
         {
             this._line = line;
